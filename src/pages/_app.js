@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }) {
         async
         src="https://www.googletagmanager.com/gtag/js?id=G-7CXJQ1G63J"
       ></Script>
-      <Script>
+      <Script id="google-analytics">
         {`
           window.dataLayer = window.dataLayer || []; function gtag()
           {dataLayer.push(arguments)}
