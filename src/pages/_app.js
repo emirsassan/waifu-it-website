@@ -19,6 +19,17 @@ function MyApp({ Component, pageProps }) {
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1733730047414795"
         crossOrigin="anonymous"
       ></Script>
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-7CXJQ1G63J"
+      ></Script>
+      <Script>
+        {`
+          window.dataLayer = window.dataLayer || []; function gtag()
+          {dataLayer.push(arguments)}
+          gtag('js', new Date()); gtag('config', 'G-7CXJQ1G63J');
+        `}
+      </Script>
       <Component {...pageProps} />
       <ReactQueryDevtools />
     </QueryClientProvider>
