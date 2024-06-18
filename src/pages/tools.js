@@ -25,10 +25,12 @@ import Cookies from "js-cookie";
 import LoadingSpinner from "./components/LoadingSpinner";
 import AnimatedDot from "./components/AnimatedDot";
 import ModerationPopup from "./components/ModerationPopup";
+import { FaSun, FaMoon } from "react-icons/fa";
 
 const API_URL = "https://jsonplaceholder.typicode.com"; // Placeholder API for testing
 
 const ToolsPage = () => {
+  const [theme, setTheme] = useState("dark");
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [editingUser, setEditingUser] = useState(null);
@@ -230,8 +232,16 @@ const ToolsPage = () => {
     });
   };
 
+  const handleToggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div
+      className={`min-h-screen ${
+        theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"
+      }`}
+    >
       {!fetched ? (
         <div className="flex flex-grow items-center justify-center">
           <LoadingSpinner />
@@ -239,14 +249,21 @@ const ToolsPage = () => {
       ) : (
         <>
           {/* Navbar */}
-          <div className="bg-gradient-to-r from-blue-500 to-blue-400 text-white p-4 font-sans">
+          <div
+            className={`bg-gradient-to-r ${
+              theme === "dark"
+                ? "from-gray-800 to-gray-700"
+                : "from-blue-500 to-blue-400"
+            } text-white p-4 font-sans`}
+          >
+            {" "}
             <nav className="max-w-screen-lg mx-auto flex flex-col md:flex-row items-center justify-between">
               <div className="text-white font-extrabold text-3xl mb-4 md:mb-0">
                 Dashboard
               </div>
               <div className="space-x-4 flex items-center relative">
                 <button
-                  onClick={() => router.push("/dashboard")}
+                  onClick={() => router.push("/")}
                   className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-blue-200 transition duration-300"
                 >
                   Home
@@ -258,10 +275,10 @@ const ToolsPage = () => {
                   Documentation
                 </button>
                 <button
-                  onClick={() => router.push("/tools")}
+                  onClick={() => router.push("/dashboard")}
                   className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-blue-200 transition duration-300"
                 >
-                  Tools
+                  Dashboard
                 </button>
                 {loggedInUser && (
                   <div className="flex items-center space-x-4">
@@ -275,7 +292,11 @@ const ToolsPage = () => {
 
                     <button
                       onClick={handleLogoutClick}
-                      className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-blue-200 transition duration-300"
+                      className={`nav-button font-semibold text-sm uppercase tracking-wide ${
+                        theme === "dark"
+                          ? "text-red-500 hover:text-red-600"
+                          : "text-white-900 hover:text-blue-200"
+                      } transition duration-300`}
                     >
                       Logout
                     </button>
@@ -289,16 +310,16 @@ const ToolsPage = () => {
           <div className="container mx-auto mt-8 px-4 min-h-[54vw]">
             {/* Display authorization message if not a moderator */}
             {!loggedInUser?.isModerator ? (
-              <div class="mt-40 mr-4 text-center">
-                <div class="page_403">
-                  <div class="four_zero_four_bg">
-                    <h1 class="text-6xl font-bold text-gray-800">403</h1>
+              <div className="mt-40 mr-4 text-center">
+                <div className="page_403">
+                  <div className="four_zero_four_bg">
+                    <h1 className="text-6xl font-bold">
+                      {/* No need to set color here */}403
+                    </h1>
                   </div>
-                  <div class="contant_box_404">
-                    <h3 class="text-1xl font-bold text-gray-800">
-                      Oops! Forbidden
-                    </h3>
-                    <p class="text-gray-600">
+                  <div className="contant_box_404">
+                    <h3 className="text-1xl font-bold">Oops! Forbidden</h3>
+                    <p className="text-gray-600">
                       You are not authorized to access this page.
                     </p>
                   </div>
