@@ -7,13 +7,16 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingSpinner from "./components/LoadingSpinner";
 import generateToken from "../utils/generateToken";
+import { FaSun, FaMoon } from "react-icons/fa";
 
 const Dashboard = () => {
   const router = useRouter();
+  const [theme, setTheme] = useState("dark");
   const [user, setUser] = useState(null);
   const [randomToken, setRandomToken] = useState("");
   const [showToken, setShowToken] = useState(true);
   const [fetched, setFetched] = useState(false); // Add fetched state
+
   const tokenInputRef = useRef(null);
 
   const handleToggleShowToken = useCallback(() => {
@@ -225,60 +228,75 @@ const Dashboard = () => {
     }
   };
 
+  const handleToggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
   const handleLogoutClick = (e) => {
     e.stopPropagation();
     handleLogout();
   };
 
   return (
-    <div className="min-h-screen bg-white text-black">
-      <ToastContainer />
+    <div
+      className={`min-h-screen ${
+        theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"
+      }`}
+    >
+      <ToastContainer
+        theme={theme === "dark" ? "dark" : "light"} // Adjust theme based on your application's theme state
+      />
       {!fetched ? (
         <div className="flex flex-grow items-center justify-center">
           <LoadingSpinner />
         </div>
       ) : (
         <>
-          <div className="bg-gradient-to-r from-blue-500 to-blue-400 text-white p-4 font-sans">
+          <div
+            className={`bg-gradient-to-r ${
+              theme === "dark"
+                ? "from-gray-800 to-gray-700"
+                : "from-blue-500 to-blue-400"
+            } text-white p-4 font-sans`}
+          >
             <nav className="max-w-screen-lg mx-auto flex flex-col md:flex-row items-center justify-between">
               <div className="text-white font-extrabold text-3xl mb-4 md:mb-0">
                 Dashboard
               </div>
               <div className="space-x-4 flex items-center relative">
-                {/* Home button */}
                 <button
                   onClick={() => router.push("/")}
                   className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-blue-200 transition duration-300"
                 >
                   Home
                 </button>
-                {/* Documentation button */}
                 <button
                   onClick={() => router.push("https://docs.waifu.it")}
                   className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-blue-200 transition duration-300"
                 >
                   Documentation
                 </button>
-                {/* Documentation button */}
                 <button
                   onClick={() => router.push("/tools")}
                   className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-blue-200 transition duration-300"
                 >
                   Tools
                 </button>
-                {/* User picture and Logout button */}
                 <div className="flex items-center space-x-4">
                   <Image
                     src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`}
                     alt={user.username}
-                    width={32} // Set the appropriate width
-                    height={32} // Set the appropriate height
+                    width={32}
+                    height={32}
                     className="w-8 h-8 rounded-full cursor-pointer border-2 border-white"
                   />
-
                   <button
                     onClick={handleLogoutClick}
-                    className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-blue-200 transition duration-300"
+                    className={`nav-button font-semibold text-sm uppercase tracking-wide ${
+                      theme === "dark"
+                        ? "text-red-500 hover:text-red-600"
+                        : "text-white-900 hover:text-blue-200"
+                    } transition duration-300`}
                   >
                     Logout
                   </button>
@@ -291,13 +309,14 @@ const Dashboard = () => {
             <div className="max-w-screen-lg mx-auto px-4">
               {randomToken && (
                 <div
-                  className="max-w-md mx-auto bg-gray-100 p-4 rounded-md mb-4"
+                  className={`max-w-md mx-auto ${
+                    theme === "dark" ? "bg-gray-800" : "bg-gray-100"
+                  } p-4 rounded-md mb-4`}
                   style={{ marginTop: "140px" }}
                 >
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-sm font-medium">Token:</span>
                   </div>
-
                   <div className="relative max-w-xs md:max-w-full">
                     <input
                       ref={tokenInputRef}
@@ -305,10 +324,16 @@ const Dashboard = () => {
                       value={randomToken}
                       readOnly
                       className={`
-              w-full px-3 py-2 pr-10 rounded-md bg-white border border-gray-300 placeholder-gray-400 
-              focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
-              ${showToken ? "text-base" : "text-sm"} md:text-base text-ellipsis
-            `}
+                        w-full px-3 py-2 pr-10 rounded-md ${
+                          theme === "dark"
+                            ? "bg-gray-700 border border-gray-600 placeholder-gray-400"
+                            : "bg-white border border-gray-300 placeholder-gray-400"
+                        } 
+                        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
+                        ${
+                          showToken ? "text-base" : "text-sm"
+                        } md:text-base text-ellipsis
+                      `}
                       onWheel={handleScroll}
                     />
                     <div
@@ -318,7 +343,6 @@ const Dashboard = () => {
                       {getEyeIcon()}
                     </div>
                   </div>
-
                   <div className="mt-4 flex justify-end space-x-2">
                     <button
                       onClick={handleRegenerateToken}
@@ -338,12 +362,13 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* <footer
-            className="w-full h-12 border-t border-gray-300 flex justify-center items-center mt-auto md:mt-10 lg:mt-20 text-sm"
-            style={{ marginTop: "160px" }}
+          {/* Theme Toggle Button */}
+          <button
+            onClick={handleToggleTheme}
+            className="fixed bottom-4 right-4 p-2 rounded-full bg-gray-700 text-white hover:bg-gray-600 transition duration-300"
           >
-            Made with ❤️ by Aeryk
-          </footer> */}
+            {theme === "dark" ? <FaSun size={24} /> : <FaMoon size={24} />}
+          </button>
         </>
       )}
     </div>
