@@ -69,11 +69,6 @@ const Home = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="author" content="Aeryk" />
         <title>Waifu.it - Home</title>
-        <link
-          rel="icon"
-          type="image/x-icon"
-          href="http://waifu.it/favicon.ico"
-        />
         <meta
           name="description"
           content="Discover a user-friendly open-source API designed to access a vast collection of 80,000+ anime waifu data and images, alongside a wide range of quotes, facts, and additional endpoints."
@@ -93,7 +88,6 @@ const Home = () => {
           content="Discover a user-friendly open-source API designed to access a vast collection of 80,000+ anime waifu data and images, alongside a wide range of quotes, facts, and additional endpoints."
         />
         <meta name="theme-color" content="#1DA1F2" />
-        <link rel="apple-touch-icon" href="http://waifu.it/logo192.png" />
         <meta
           name="google-adsense-account"
           content="ca-pub-1733730047414795"
