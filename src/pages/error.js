@@ -1,9 +1,11 @@
-import Link from 'next/link'
-import { useEffect } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ErrorPage = ({ message }) => {
+  const [theme, setTheme] = useState("dark"); // Default to light theme
+
   useEffect(() => {
     // Display toast notification when component mounts
     const toastId = toast.error('Click "Re-authenticate" to continue.', {
@@ -17,18 +19,22 @@ const ErrorPage = ({ message }) => {
   }, []);
 
   const handleReauthClick = () => {
-    toast.info('Re-authenticating...', {
+    toast.info("Re-authenticating...", {
       autoClose: 2000,
     });
 
     setTimeout(() => {
       // Redirect to the dashboard page after waiting
-      window.location.href = '/dashboard';
+      window.location.href = "/dashboard";
     }, 3000);
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-white text-black">
+    <div
+      className={`flex flex-col items-center justify-center min-h-screen  ${
+        theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"
+      }`}
+    >
       <p className="text-lg mb-6">{message}</p>
       <div className="flex space-x-4 mt-4">
         <button
@@ -44,7 +50,11 @@ const ErrorPage = ({ message }) => {
           Home
         </Link>
       </div>
-      <ToastContainer position="bottom-right" autoClose={3000} />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        theme={theme === "dark" ? "dark" : "light"}
+      />
     </div>
   );
 };

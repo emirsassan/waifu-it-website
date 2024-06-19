@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import "tailwindcss/tailwind.css";
 import "../styles/globals.css";
+import "tailwind-scrollbar";
 import Head from "next/head";
 import Script from "next/script";
 
