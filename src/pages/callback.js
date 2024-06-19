@@ -11,6 +11,7 @@ const Callback = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [authInProgress, setAuthInProgress] = useState(true);
   const [showErrorPage, setShowErrorPage] = useState(false);
+  const [theme, setTheme] = useState("dark"); // Default to light theme
 
   useEffect(() => {
     if (code) {
@@ -33,7 +34,11 @@ const Callback = () => {
   }, [code, router]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-white text-black">
+    <div
+      className={`flex flex-col items-center justify-center min-h-screen ${
+        theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"
+      }`}
+    >
       {authInProgress ? (
         <div className="flex flex-col items-center">
           <p className="text-lg mb-6">Authentication in progress...</p>
