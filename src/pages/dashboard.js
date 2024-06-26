@@ -276,12 +276,6 @@ const Dashboard = () => {
                 >
                   Documentation
                 </button>
-                <button
-                  onClick={() => router.push("/tools")}
-                  className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-blue-200 transition duration-300"
-                >
-                  Tools
-                </button>
                 <div className="flex items-center space-x-4">
                   <Image
                     src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`}
