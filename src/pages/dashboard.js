@@ -318,17 +318,13 @@ const Dashboard = () => {
                       value={randomToken}
                       readOnly
                       className={`
-                        w-full px-3 py-2 pr-10 rounded-md ${
-                          theme === "dark"
-                            ? "bg-gray-700 border border-gray-600 placeholder-gray-400"
-                            : "bg-white border border-gray-300 placeholder-gray-400"
-                        } 
-                        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
-                        ${
-                          showToken ? "text-base" : "text-sm"
-                        } md:text-base text-ellipsis
-                      `}
-                      onWheel={handleScroll}
+              w-full px-3 py-2 pr-10 rounded-md ${
+                theme === "dark"
+                  ? "bg-gray-700 border border-gray-600 placeholder-gray-400 text-white"
+                  : "bg-white border border-gray-300 placeholder-gray-400 text-black"
+              } 
+              focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+            `}
                     />
                     <div
                       className="absolute top-0 right-0 bottom-0 flex items-center px-3 cursor-pointer eye-icon"
