@@ -192,7 +192,7 @@ const Home = () => {
                       }
                       onMouseEnter={() => handleMouseEnter("getStarted")}
                       onMouseLeave={handleMouseLeave}
-                      className="relative overflow-hidden btn-primary bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition duration-300 ease-in-out"
+                      className="relative overflow-hidden btn-primary bg-blue-500 hover:bg-blue-600 text-white py-2 px-8 rounded-lg transition duration-300 ease-in-out"
                     >
                       <span
                         className={`inline-block transition-transform duration-300 ${
@@ -204,7 +204,7 @@ const Home = () => {
                         Get Started
                       </span>
                       <span
-                        className={`absolute right-0 top-0 bottom-0 flex items-center justify-center px-2 bg-transparent transform transition-transform duration-300 ${
+                        className={`absolute right-0 top-0 bottom-0 flex items-center justify-center px-3 bg-transparent transform transition-transform duration-300 ${
                           hoveredButton === "getStarted"
                             ? "translate-x-0 opacity-100"
                             : "translate-x-full opacity-0"
@@ -219,7 +219,7 @@ const Home = () => {
                       onClick={handleLogin}
                       onMouseEnter={() => handleMouseEnter("dashboard")}
                       onMouseLeave={handleMouseLeave}
-                      className="relative overflow-hidden btn-outline bg-transparent border border-gray-300 text-gray-300 py-2 px-4 rounded-lg hover:bg-gray-300 hover:text-gray-900 transition duration-300 ease-in-out"
+                      className="relative overflow-hidden btn-outline bg-transparent border border-gray-300 text-gray-300 py-2 px-8 rounded-lg hover:bg-gray-300 hover:text-gray-900 transition duration-300 ease-in-out"
                     >
                       <span
                         className={`inline-block transition-transform duration-300 ${
@@ -231,7 +231,7 @@ const Home = () => {
                         Dashboard
                       </span>
                       <span
-                        className={`absolute right-0 top-0 bottom-0 flex items-center justify-center px-2 bg-transparent text-gray-300 transform transition-transform duration-300 ${
+                        className={`absolute right-0 top-0 bottom-0 flex items-center justify-center px-3 bg-transparent text-gray-300 transform transition-transform duration-300 ${
                           hoveredButton === "dashboard"
                             ? "translate-x-0 opacity-100"
                             : "translate-x-full opacity-0"
