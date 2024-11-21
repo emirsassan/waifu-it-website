@@ -13,6 +13,20 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
+    colors: {
+      // primary one
+      text: "#050315",
+      background: "#fbfbfe",
+      primary: "#2f27ce",
+      secondary: "#dedcff",
+      accent: "#433bff",
+
+      "dark-text": "#dedcef",
+      "dark-background": "#040309",
+      "dark-primary": "#9d98e2",
+      "dark-secondary": "#241d86",
+      "dark-accent": "#463ae1",
+    },
   },
   plugins: [require("tailwind-scrollbar")],
 };

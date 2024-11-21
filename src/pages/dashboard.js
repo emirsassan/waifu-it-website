@@ -172,7 +172,7 @@ const Dashboard = () => {
     return showToken ? (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6 text-gray-500"
+        className="h-6 w-6 text-text"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -193,7 +193,7 @@ const Dashboard = () => {
     ) : (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6 text-gray-500"
+        className="h-6 w-6 text-text"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -240,7 +240,7 @@ const Dashboard = () => {
   return (
     <div
       className={`min-h-screen ${
-        theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"
+        theme === "dark" ? "bg-dark-background text-dark-text" : "bg-background text-text"
       }`}
     >
       <ToastContainer
@@ -320,7 +320,7 @@ const Dashboard = () => {
                       className={`
               w-full px-3 py-2 pr-10 rounded-md ${
                 theme === "dark"
-                  ? "bg-gray-700 border border-gray-600 placeholder-gray-400 text-white"
+                  ? "bg-background border border-gray-600 placeholder-gray-400 text-text"
                   : "bg-white border border-gray-300 placeholder-gray-400 text-black"
               } 
               focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
