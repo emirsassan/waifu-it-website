@@ -21,8 +21,8 @@ const EditPopup = ({ user, onClose, onSave }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
-      <div className="bg-white p-8 rounded shadow-md w-full sm:w-96">
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-50 bg-opacity-50">
+      <div className="bg-background p-8 rounded-lg shadow-md w-full sm:w-96">
         <h2 className="text-2xl font-semibold mb-4">Edit User</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">

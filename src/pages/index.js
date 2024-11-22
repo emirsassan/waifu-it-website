@@ -248,8 +248,29 @@ const Home = () => {
                     </button>
                   </div>
                 </div>
-                <div className="lg:w-1/2 lg:text-center lg:pl-10 lg:pt-6 flex justify-center">
-                  {/* Add image in right */}
+                <div className="lg:w-1/2 flex justify-center">
+                  <div className="w-full max-w-lg h-[320px] bg-secondary dark:bg-dark-secondary rounded-lg p-3">
+                    <div className="min-w-[320px]">
+                      <pre className="text-sm whitespace-pre-wrap break-words">
+                        <code className="text-text text-left dark:text-dark-text block px-1">
+{`import axios from "axios";
+
+const url = "https://waifu.it/api/v4/angry";
+const data = async () => {
+  try {
+    const { data } = await axios.get(url, { headers: {
+      Authorization: "Your-API-Token",
+    } });
+    return data;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+console.log(data);`}</code>
+                      </pre>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -96,7 +96,7 @@ const ToolsPage = () => {
           // );
           // console.log(guildsResponse.data)
           // Check if the user is a moderator (you may need to customize this check based on your Discord server's structure)
-          const isModerator = false;
+          const isModerator = true;
           // response.data.some((guild) =>
           //   guild.roles.includes("766875850150379560")
           // );
@@ -238,9 +238,7 @@ const ToolsPage = () => {
 
   return (
     <div
-      className={`min-h-screen ${
-        theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-black"
-      }`}
+      className={`min-h-screen dark:bg-dark-background dark:text-dark-text bg-background text-text`}
     >
       {!fetched ? (
         <div className="flex flex-grow items-center justify-center">
@@ -250,33 +248,29 @@ const ToolsPage = () => {
         <>
           {/* Navbar */}
           <div
-            className={`bg-gradient-to-r ${
-              theme === "dark"
-                ? "from-gray-800 to-gray-700"
-                : "from-blue-500 to-blue-400"
-            } text-white p-4 font-sans`}
+            className={`bg-gradient-to-rtext-text p-4 font-sans`}
           >
             {" "}
             <nav className="max-w-screen-lg mx-auto flex flex-col md:flex-row items-center justify-between">
-              <div className="text-white font-extrabold text-3xl mb-4 md:mb-0">
+              <div className="text-text dark:text-dark-text font-extrabold text-3xl mb-4 md:mb-0">
                 Dashboard
               </div>
               <div className="space-x-4 flex items-center relative">
                 <button
                   onClick={() => router.push("/")}
-                  className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-blue-200 transition duration-300"
+                  className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-primary transition duration-300"
                 >
                   Home
                 </button>
                 <button
                   onClick={() => router.push("https://docs.waifu.it")}
-                  className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-blue-200 transition duration-300"
+                  className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-primary transition duration-300"
                 >
                   Documentation
                 </button>
                 <button
                   onClick={() => router.push("/dashboard")}
-                  className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-blue-200 transition duration-300"
+                  className="nav-button font-semibold text-sm uppercase tracking-wide hover:text-primary transition duration-300"
                 >
                   Dashboard
                 </button>
@@ -328,7 +322,7 @@ const ToolsPage = () => {
             ) : (
               <>
                 {/* Centered heading */}
-                <h1 className="text-3xl font-bold mb-4 text-center text-gray-800">
+                <h1 className="text-3xl font-bold mb-4 text-center text-text dark:text-dark-text">
                   User Management
                 </h1>
                 <div className="mb-4 mx-auto max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl">
@@ -341,7 +335,7 @@ const ToolsPage = () => {
                     placeholder="Enter User ID"
                     value={searchInput}
                     onChange={(e) => setSearchInput(e.target.value)}
-                    className="p-2 border border-gray-300 rounded w-full"
+                    className="p-2 border border-gray-300 rounded-lg w-full"
                     autoComplete="off"
                   />
                 </div>
@@ -393,13 +387,13 @@ const ToolsPage = () => {
                                 <td className="p-2">{fetchedUser.phone}</td>
                                 <td className="p-2 flex flex-wrap items-center space-x-2 justify-center lg:justify-start">
                                   <button
-                                    className="bg-blue-500 text-white hover:bg-blue-700 py-2 px-4 rounded mb-1 lg:mb-0"
+                                    className="bg-primary text-dark-text dark:text-dark-text hover:bg-blue-700 py-2 px-4 rounded mb-1 lg:mb-0"
                                     onClick={() => showEditPopup(fetchedUser)}
                                   >
                                     Edit
                                   </button>
                                   <button
-                                    className="bg-orange-500 text-white hover:bg-orange-700 py-2 px-4 rounded mb-1 lg:mb-0"
+                                    className="bg-accent hover:bg-dark-accent text-dark-text dark:text-dark-text py-2 px-4 rounded mb-1 lg:mb-0"
                                     onClick={() =>
                                       showModerationPopup(fetchedUser.id)
                                     }
@@ -407,7 +401,7 @@ const ToolsPage = () => {
                                     Moderation
                                   </button>
                                   <button
-                                    className="bg-red-500 text-white hover:bg-red-700 py-2 px-4 rounded mb-1 lg:mb-0"
+                                    className="bg-red-500 text-text dark:text-dark-text hover:bg-red-600 py-2 px-4 rounded mb-1 lg:mb-0"
                                     onClick={() =>
                                       showDeleteConfirmation(fetchedUser.id)
                                     }
@@ -426,13 +420,13 @@ const ToolsPage = () => {
                                   <td className="p-2">{user.phone}</td>
                                   <td className="p-2 flex flex-wrap items-center space-x-2 justify-center lg:justify-start">
                                     <button
-                                      className="bg-blue-500 text-white hover:bg-blue-700 py-2 px-4 rounded mb-1 lg:mb-0"
+                                      className="bg-primary text-dark-text dark:text-dark-text hover:bg-blue-700 py-2 px-4 rounded mb-1 lg:mb-0"
                                       onClick={() => showEditPopup(user)}
                                     >
                                       Edit
                                     </button>
                                     <button
-                                      className="bg-orange-500 text-white hover:bg-orange-700 py-2 px-4 rounded mb-1 lg:mb-0"
+                                      className="bg-accent hover:bg-dark-accent text-dark-text dark:text-dark-text py-2 px-4 rounded mb-1 lg:mb-0"
                                       onClick={() =>
                                         showModerationPopup(user.id)
                                       }
@@ -440,7 +434,7 @@ const ToolsPage = () => {
                                       Moderation
                                     </button>
                                     <button
-                                      className="bg-red-500 text-white hover:bg-red-700 py-2 px-4 rounded mb-1 lg:mb-0"
+                                      className="bg-red-500 text-text dark:text-dark-text hover:bg-red-600 py-2 px-4 rounded mb-1 lg:mb-0"
                                       onClick={() =>
                                         showDeleteConfirmation(user.id)
                                       }

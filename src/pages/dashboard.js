@@ -245,11 +245,7 @@ const Dashboard = () => {
       ) : (
         <>
           <div
-            className={`bg-gradient-to-r ${
-              theme === "dark"
-                ? "from-gray-800 to-gray-700"
-                : "from-blue-500 to-blue-400"
-            } text-white p-4 font-sans`}
+            className={`bg-gradient-to-r text-text p-4 font-sans`}
           >
             <nav className="max-w-screen-lg mx-auto flex flex-col md:flex-row items-center justify-between">
               <div className="text-white font-extrabold text-3xl mb-4 md:mb-0">
