@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import LoadingSpinner from "./components/LoadingSpinner";
 import generateToken from "../utils/generateToken";
 import { FaSun, FaMoon } from "react-icons/fa";
+import ThemeSwitch from "./components/ThemeSwitch";
 
 const Dashboard = () => {
   const router = useRouter();
@@ -172,44 +173,37 @@ const Dashboard = () => {
     return showToken ? (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6 text-text"
-        fill="none"
+        width="24"
+        height="24"
         viewBox="0 0 24 24"
+        fill="none"
         stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="size-6 text-text"
       >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M2 9l6 6 6-6"
-        />
+        <path d="m15 18-.722-3.25" />
+        <path d="M2 8a10.645 10.645 0 0 0 20 0" />
+        <path d="m20 15-1.726-2.05" />
+        <path d="m4 15 1.726-2.05" />
+        <path d="m9 18 .722-3.25" />
       </svg>
     ) : (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6 text-text"
-        fill="none"
+        width="24"
+        height="24"
         viewBox="0 0 24 24"
+        fill="none"
         stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="size-6 text-text"
       >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M9 4.535c2.71-.973 5.566-.973 8.276 0M3 3l18 18"
-        />
+        <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+        <circle cx="12" cy="12" r="3" />
       </svg>
     );
   };
@@ -239,9 +233,7 @@ const Dashboard = () => {
 
   return (
     <div
-      className={`min-h-screen ${
-        theme === "dark" ? "bg-dark-background text-dark-text" : "bg-background text-text"
-      }`}
+      className="min-h-screen bg-background text-text dark:bg-dark-background dark:text-dark-text"
     >
       <ToastContainer
         theme={theme === "dark" ? "dark" : "light"} // Adjust theme based on your application's theme state
@@ -299,66 +291,83 @@ const Dashboard = () => {
             </nav>
           </div>
 
-          <div className="py-8">
-            <div className="max-w-screen-lg mx-auto px-4">
-              {randomToken && (
-                <div
-                  className={`max-w-md mx-auto ${
-                    theme === "dark" ? "bg-gray-800" : "bg-gray-100"
-                  } p-4 rounded-md mb-4`}
-                  style={{ marginTop: "140px" }}
-                >
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium">Token:</span>
+          <div className="container mx-auto px-4 py-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className={`p-6 rounded-lg shadow-lg`}>
+                <h2 className="text-xl font-bold mb-4">API Statistics</h2>
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center">
+                    <span>Requests Today</span>
+                    <span className="font-semibold">0</span>
                   </div>
-                  <div className="relative max-w-xs md:max-w-full">
-                    <input
-                      ref={tokenInputRef}
-                      type={showToken ? "text" : "password"}
-                      value={randomToken}
-                      readOnly
-                      className={`
-              w-full px-3 py-2 pr-10 rounded-md ${
-                theme === "dark"
-                  ? "bg-background border border-gray-600 placeholder-gray-400 text-text"
-                  : "bg-white border border-gray-300 placeholder-gray-400 text-black"
-              } 
-              focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-            `}
-                    />
-                    <div
-                      className="absolute top-0 right-0 bottom-0 flex items-center px-3 cursor-pointer eye-icon"
-                      onClick={handleToggleShowToken}
-                    >
-                      {getEyeIcon()}
-                    </div>
+                  <div className="flex justify-between items-center">
+                    <span>Rate Limit</span>
+                    <span className="font-semibold">100/500</span>
                   </div>
-                  <div className="mt-4 flex justify-end space-x-2">
-                    <button
-                      onClick={handleRegenerateToken}
-                      className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
-                    >
-                      Regenerate
-                    </button>
-                    <button
-                      onClick={handleCopyToken}
-                      className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
-                    >
-                      Copy
-                    </button>
+                  <div className="flex justify-between items-center">
+                    <span>Status</span>
+                    <span className="text-green-500 font-semibold">Active</span>
                   </div>
                 </div>
-              )}
+              </div>
+
+              <div className={`p-6 rounded-lg shadow-lg lg:col-span-2`}>
+                <h2 className="text-xl font-bold mb-4">API Token</h2>
+
+                <div className={`mb-6 p-4 rounded-lg dark:bg-red-900/30 bg-red-50 border dark:border-red-800 border-red-200`}>
+                  <h3 className="text-red-600 dark:text-red-400 font-semibold mb-2">
+                    ⚠️ Security Notice
+                  </h3>
+                  <p className={`text-sm dark:text-red-400 text-red-700`}>
+                    Keep this token secret! Never share it or commit it to version control.
+                    If compromised, regenerate immediately. This token grants access to the API on your behalf.
+                  </p>
+                </div>
+
+                {randomToken && (
+                  <div className="space-y-4">
+                    <div className="relative">
+                      <input
+                        ref={tokenInputRef}
+                        type={showToken ? "text" : "password"}
+                        value={randomToken}
+                        readOnly
+                        className={`w-full px-3 py-2 pr-10 rounded-md text-text dark:bg-background dark:border-none border border-gray-300`}
+                      />
+                      <div
+                        className="absolute top-0 right-0 bottom-0 flex items-center px-3 cursor-pointer"
+                        onClick={handleToggleShowToken}
+                      >
+                        {getEyeIcon()}
+                      </div>
+                    </div>
+                    <div className="flex space-x-3">
+                      <button
+                        onClick={handleCopyToken}
+                        className="flex-1 py-2 px-4 rounded-md bg-accent dark:bg-dark-secondary transition duration-300 text-dark-text"
+                      >
+                        Copy Token
+                      </button>
+                      <button
+                        onClick={handleRegenerateToken}
+                        className="flex-1 py-2 px-4 rounded-md bg-secondary dark:bg-dark-accent transition duration-300 text-text dark:text-dark-text"
+                      >
+                        Regenerate Token
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
-          {/* Theme Toggle Button */}
-          <button
+          {/* <button
             onClick={handleToggleTheme}
             className="fixed bottom-4 right-4 p-2 rounded-full bg-gray-700 text-white hover:bg-gray-600 transition duration-300"
           >
             {theme === "dark" ? <FaSun size={24} /> : <FaMoon size={24} />}
-          </button>
+          </button> */}
+          <ThemeSwitch />
         </>
       )}
     </div>

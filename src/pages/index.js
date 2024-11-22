@@ -96,14 +96,14 @@ const Home = () => {
       <div className="flex flex-col min-h-screen ">
         <main className="flex-shrink-0">
           {/* Navigation */}
-          <nav className="bg-gray-900 relative">
+          <nav className="bg-background dark:bg-dark-background relative">
             <div className="container mx-auto px-10 lg:px-12 py-6 lg:py-8 flex items-center justify-between">
-              <Link href="/" className="text-white text-lg font-semibold">
+              <Link href="/" className="text-text dark:text-dark-text text-lg font-semibold">
                 Waifu.it
               </Link>
               <button
                 onClick={toggleNavbar}
-                className="text-white block lg:hidden"
+                className="text-text dark:text-dark-text block lg:hidden"
               >
                 {isOpen ? (
                   <FaChevronUp className="h-6 w-6" />
@@ -114,19 +114,19 @@ const Home = () => {
               <div className="hidden lg:flex lg:items-center lg:space-x-6">
                 <Link
                   href="https://discord.gg/yyW389c"
-                  className="text-white hover:text-gray-300"
+                  className="text-text dark:text-dark-text hover:text-gray-300"
                 >
                   Support
                 </Link>
                 <Link
                   href="https://ko-fi.com/Aeryk"
-                  className="text-white hover:text-gray-300"
+                  className="text-text dark:text-dark-text hover:text-gray-300"
                 >
                   Donate Us
                 </Link>
                 <Link
                   href="https://github.com/WaifuAPI"
-                  className="text-white hover:text-gray-300"
+                  className="text-text dark:text-dark-text hover:text-gray-300"
                 >
                   GitHub
                 </Link>
@@ -144,24 +144,24 @@ const Home = () => {
               {(ref) => (
                 <div
                   ref={menuRef}
-                  className="absolute w-full top-full left-0 lg:hidden bg-gray-900 z-50"
+                  className="absolute w-full top-full left-0 lg:hidden bg-background dark:bg-dark-background z-50"
                 >
                   <div className="px-7 pt-2 pb-3 space-y-1">
                     <Link
                       href="https://discord.gg/yyW389c"
-                      className="block text-white mt-1 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
+                      className="block text-text dark:text-dark-text mt-1 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
                     >
                       Support
                     </Link>
                     <Link
                       href="https://ko-fi.com/Aeryk"
-                      className="block text-white mt-1 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
+                      className="block text-text dark:text-dark-text mt-1 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
                     >
                       Donate Us
                     </Link>
                     <Link
                       href="https://github.com/WaifuAPI"
-                      className="block text-white mt-1 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
+                      className="block text-text dark:text-dark-text mt-1 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium"
                     >
                       GitHub
                     </Link>
@@ -172,14 +172,14 @@ const Home = () => {
           </nav>
 
           {/* Header */}
-          <header className="bg-gray-900 py-16">
+          <header className="bg-background dark:bg-dark-background py-16">
             <div className="container mx-auto px-5 lg:px-12 text-center lg:text-left">
               <div className="lg:flex lg:items-center lg:justify-between lg:pt-8">
-                <div className="mb-10 lg:mb-0 lg:max-w-xl lg:text-left text-white">
-                  <h1 className="text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                <div className="mb-10 lg:mb-0 lg:max-w-xl lg:text-left">
+                  <h1 className="text-4xl text-text dark:text-dark-text lg:text-5xl font-bold mb-4 leading-tight">
                     🌟 Unleash Anime Magic with Waifu.it!
                   </h1>
-                  <p className="text-lg text-gray-300 mb-6">
+                  <p className="text-lg text-text dark:text-dark-text mb-6">
                     🚀 Your ultimate source for anime data and insights.
                     Empowering developers and anime enthusiasts to create
                     exceptional experiences
@@ -192,7 +192,7 @@ const Home = () => {
                       }
                       onMouseEnter={() => handleMouseEnter("getStarted")}
                       onMouseLeave={handleMouseLeave}
-                      className="relative overflow-hidden btn-primary bg-blue-500 hover:bg-blue-600 text-white py-2 px-8 rounded-lg transition duration-300 ease-in-out"
+                      className="relative overflow-hidden bg-primary dark:bg-dark-primary text-dark-text dark:text-dark-background  py-2 px-8 rounded-lg transition duration-300 ease-in-out"
                     >
                       <span
                         className={`inline-block transition-transform duration-300 ${
@@ -219,7 +219,7 @@ const Home = () => {
                       onClick={handleLogin}
                       onMouseEnter={() => handleMouseEnter("dashboard")}
                       onMouseLeave={handleMouseLeave}
-                      className="relative overflow-hidden btn-outline bg-transparent border border-gray-300 text-gray-300 py-2 px-8 rounded-lg hover:bg-gray-300 hover:text-gray-900 transition duration-300 ease-in-out"
+                      className="relative overflow-hidden btn-outline bg-transparent py-2 px-8 rounded-lg hover:bg-secondary dark:hover:bg-dark-accent text-text dark:text-dark-text transition duration-300 ease-in-out"
                     >
                       <span
                         className={`inline-block transition-transform duration-300 ${
@@ -256,7 +256,7 @@ const Home = () => {
           </header>
 
           {/* Enhanced Features Section */}
-          <section className="py-16" id="features">
+          <section className="py-16 bg-secondary dark:bg-dark-secondary text-text dark:text-dark-text" id="features">
             <div className="container mx-auto px-5">
               <div className="grid lg:grid-cols-2 gap-16">
                 <div>
@@ -328,7 +328,7 @@ const Home = () => {
         </main>
 
         {/* Footer */}
-        <footer className="bg-gray-900 py-4 px-12 lg:px-18 mt-auto">
+        <footer className="bg-background dark:bg-dark-background text-text dark:text-dark-text py-4 px-12 lg:px-18 mt-auto">
           <div className="container mx-auto px-5 text-center lg:text-left -translate-y-2">
             <div className="flex flex-col space-y-4 lg:flex-row lg:items-center lg:justify-between">
               <div className="text-white">&copy; Waifu.it 2024</div>

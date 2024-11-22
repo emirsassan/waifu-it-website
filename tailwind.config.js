@@ -28,5 +28,6 @@ module.exports = {
       "dark-accent": "#463ae1",
     },
   },
+  darkMode: 'selector',
   plugins: [require("tailwind-scrollbar")],
 };

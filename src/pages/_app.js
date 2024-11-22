@@ -1,6 +1,7 @@
 // pages/_app.js
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { ThemeProvider } from 'next-themes'
 import "tailwindcss/tailwind.css";
 import "../styles/globals.css";
 import "tailwind-scrollbar";
@@ -31,7 +32,9 @@ function MyApp({ Component, pageProps }) {
           gtag('js', new Date()); gtag('config', 'G-7CXJQ1G63J');
         `}
       </Script>
-      <Component {...pageProps} />
+      <ThemeProvider attribute="class">
+        <Component {...pageProps} />
+      </ThemeProvider>
       <ReactQueryDevtools />
     </QueryClientProvider>
   );
