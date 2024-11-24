@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingSpinner from "./components/LoadingSpinner";
 import generateToken from "../utils/generateToken";
-import { FaSun, FaMoon } from "react-icons/fa";
+import { FaSun, FaMoon, FaSignOutAlt } from "react-icons/fa";
 
 const Dashboard = () => {
   const router = useRouter();
@@ -69,7 +69,6 @@ const Dashboard = () => {
           access_token: accessToken,
         }
       );
-
       setRandomToken(response.data);
       setFetched(true); // Mark user details as fetched
     };
@@ -136,7 +135,7 @@ const Dashboard = () => {
         token: newToken,
       });
 
-      setRandomToken(newToken);
+      setRandomToken({ token: newToken });
       setShowToken(true);
 
       // Update the last regeneration time on the client-side
@@ -146,7 +145,7 @@ const Dashboard = () => {
         position: toast.POSITION.BOTTOM_RIGHT,
       });
 
-      console.log("POST request response:", response.data);
+      console.log(response.data);
     } catch (error) {
       if (error.message.startsWith("Rate limit exceeded")) {
         toast.error(error.message, {
@@ -162,7 +161,7 @@ const Dashboard = () => {
   };
 
   const handleCopyToken = () => {
-    navigator.clipboard.writeText(randomToken);
+    navigator.clipboard.writeText(randomToken.token);
     toast.success("Token copied to clipboard!", {
       position: toast.POSITION.BOTTOM_RIGHT,
     });
@@ -292,7 +291,7 @@ const Dashboard = () => {
                         : "text-white-900 hover:text-blue-200"
                     } transition duration-300`}
                   >
-                    Logout
+                    <FaSignOutAlt className="inline-block" /> Logout
                   </button>
                 </div>
               </div>
@@ -315,7 +314,7 @@ const Dashboard = () => {
                     <input
                       ref={tokenInputRef}
                       type={showToken ? "text" : "password"}
-                      value={randomToken}
+                      value={randomToken.token}
                       readOnly
                       className={`
               w-full px-3 py-2 pr-10 rounded-md ${
