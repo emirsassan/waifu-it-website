@@ -7,8 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingSpinner from "./components/LoadingSpinner";
 import generateToken from "../utils/generateToken";
-import { FaSun, FaMoon } from "react-icons/fa";
-import ThemeSwitch from "./components/ThemeSwitch";
+import { FaSun, FaMoon, FaSignOutAlt } from "react-icons/fa";
 
 const Dashboard = () => {
   const router = useRouter();
@@ -70,7 +69,6 @@ const Dashboard = () => {
           access_token: accessToken,
         }
       );
-
       setRandomToken(response.data);
       setFetched(true); // Mark user details as fetched
     };
@@ -137,7 +135,7 @@ const Dashboard = () => {
         token: newToken,
       });
 
-      setRandomToken(newToken);
+      setRandomToken({ token: newToken });
       setShowToken(true);
 
       // Update the last regeneration time on the client-side
@@ -147,7 +145,7 @@ const Dashboard = () => {
         position: toast.POSITION.BOTTOM_RIGHT,
       });
 
-      console.log("POST request response:", response.data);
+      console.log(response.data);
     } catch (error) {
       if (error.message.startsWith("Rate limit exceeded")) {
         toast.error(error.message, {
@@ -163,7 +161,7 @@ const Dashboard = () => {
   };
 
   const handleCopyToken = () => {
-    navigator.clipboard.writeText(randomToken);
+    navigator.clipboard.writeText(randomToken.token);
     toast.success("Token copied to clipboard!", {
       position: toast.POSITION.BOTTOM_RIGHT,
     });
@@ -280,7 +278,7 @@ const Dashboard = () => {
                         : "text-white-900 hover:text-blue-200"
                     } transition duration-300`}
                   >
-                    Logout
+                    <FaSignOutAlt className="inline-block" /> Logout
                   </button>
                 </div>
               </div>
@@ -296,9 +294,27 @@ const Dashboard = () => {
                     <span>Requests Today</span>
                     <span className="font-semibold">0</span>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span>Rate Limit</span>
-                    <span className="font-semibold">100/500</span>
+                  <div className="relative max-w-xs md:max-w-full">
+                    <input
+                      ref={tokenInputRef}
+                      type={showToken ? "text" : "password"}
+                      value={randomToken.token}
+                      readOnly
+                      className={`
+              w-full px-3 py-2 pr-10 rounded-md ${
+                theme === "dark"
+                  ? "bg-gray-700 border border-gray-600 placeholder-gray-400 text-white"
+                  : "bg-white border border-gray-300 placeholder-gray-400 text-black"
+              } 
+              focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+            `}
+                    />
+                    <div
+                      className="absolute top-0 right-0 bottom-0 flex items-center px-3 cursor-pointer eye-icon"
+                      onClick={handleToggleShowToken}
+                    >
+                      {getEyeIcon()}
+                    </div>
                   </div>
                   <div className="flex justify-between items-center">
                     <span>Status</span>

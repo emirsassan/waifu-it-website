@@ -15,7 +15,6 @@ const nextConfig = {
     GUILD_ID: process.env.GUILD_ID,
   },
   images: {
-    domains: ["cdn.discordapp.com"],
     remotePatterns: [
       {
         protocol: "https",
