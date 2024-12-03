@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import LoadingSpinner from "./components/LoadingSpinner";
 import generateToken from "../utils/generateToken";
 import { FaSun, FaMoon, FaSignOutAlt } from "react-icons/fa";
+import ThemeSwitch from "./components/ThemeSwitch";
 
 const Dashboard = () => {
   const router = useRouter();
