@@ -127,9 +127,15 @@ const Dashboard = () => {
         throw new Error("Access token not found.");
       }
 
-      // Call the server endpoint to generate and save new token
-      const response = await axios.post("/api/auth/regenerate-token", {
-        userId: user.id,
+      const response = await axios.post("/api/auth/generate-random-token", {
+        id: user.id,
+      });
+
+      const newToken = response.data.token;
+      //  Send the new token to the server to save it, similar to the original logic
+      await axios.post("/api/auth/user", {
+        id: user.id,
+        token: newToken,
       });
 
       setRandomToken({ token: response.data.token });
