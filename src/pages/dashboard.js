@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingSpinner from "./components/LoadingSpinner";
-import generateToken from "../utils/generateToken";
 import { FaSun, FaMoon, FaSignOutAlt } from "react-icons/fa";
 import ThemeSwitch from "./components/ThemeSwitch";
 
@@ -128,16 +127,12 @@ const Dashboard = () => {
         throw new Error("Access token not found.");
       }
 
-      const newToken = generateToken(user.id, process.env.HMAC_KEY);
-
-      // Send the new token to the server to save it, similar to the original logic
-      const response = await axios.post("/api/auth/user", {
-        id: user.id,
-        token: newToken,
+      // Call the server endpoint to generate and save new token
+      const response = await axios.post("/api/auth/regenerate-token", {
+        userId: user.id,
       });
 
-      setRandomToken({ token: newToken });
-      setShowToken(true);
+      setRandomToken({ token: response.data.token });
 
       // Update the last regeneration time on the client-side
       localStorage.setItem("last_regen_time", currentTime.toString());
@@ -145,15 +140,13 @@ const Dashboard = () => {
       toast.info("Successfully regenerated!", {
         position: toast.POSITION.BOTTOM_RIGHT,
       });
-
-      console.log(response.data);
     } catch (error) {
       if (error.message.startsWith("Rate limit exceeded")) {
         toast.error(error.message, {
           position: toast.POSITION.BOTTOM_RIGHT,
         });
       } else {
-        console.error("Error regenerating token");
+        console.error("Error regenerating token:", error);
         toast.error("Error regenerating token.", {
           position: toast.POSITION.BOTTOM_RIGHT,
         });
@@ -288,41 +281,6 @@ const Dashboard = () => {
 
           <div className="container mx-auto px-4 py-8">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className={`p-6 rounded-lg shadow-lg`}>
-                <h2 className="text-xl font-bold mb-4">API Statistics</h2>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center">
-                    <span>Requests Today</span>
-                    <span className="font-semibold">0</span>
-                  </div>
-                  <div className="relative max-w-xs md:max-w-full">
-                    <input
-                      ref={tokenInputRef}
-                      type={showToken ? "text" : "password"}
-                      value={randomToken.token}
-                      readOnly
-                      className={`
-              w-full px-3 py-2 pr-10 rounded-md ${
-                theme === "dark"
-                  ? "bg-gray-700 border border-gray-600 placeholder-gray-400 text-white"
-                  : "bg-white border border-gray-300 placeholder-gray-400 text-black"
-              } 
-              focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-            `}
-                    />
-                    <div
-                      className="absolute top-0 right-0 bottom-0 flex items-center px-3 cursor-pointer eye-icon"
-                      onClick={handleToggleShowToken}
-                    >
-                      {getEyeIcon()}
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Status</span>
-                    <span className="text-green-500 font-semibold">Active</span>
-                  </div>
-                </div>
-              </div>
 
               <div className={`p-6 rounded-lg shadow-lg lg:col-span-2`}>
                 <h2 className="text-xl font-bold mb-4">API Token</h2>
@@ -343,7 +301,7 @@ const Dashboard = () => {
                       <input
                         ref={tokenInputRef}
                         type={showToken ? "text" : "password"}
-                        value={randomToken}
+                        value={randomToken.token}
                         readOnly
                         className={`w-full px-3 py-2 pr-10 rounded-md text-text dark:bg-background dark:border-none border border-gray-300`}
                       />
