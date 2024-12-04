@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingSpinner from "./components/LoadingSpinner";
-import generateToken from "../utils/generateToken";
 import { FaSun, FaMoon, FaSignOutAlt } from "react-icons/fa";
 
 const Dashboard = () => {
@@ -127,10 +126,13 @@ const Dashboard = () => {
         throw new Error("Access token not found.");
       }
 
-      const newToken = generateToken(user.id, process.env.HMAC_KEY);
+      const response = await axios.post("/api/auth/generate-random-token", {
+        id: user.id,
+      });
 
-      // Send the new token to the server to save it, similar to the original logic
-      const response = await axios.post("/api/auth/user", {
+      const newToken = response.data.token;
+      //  Send the new token to the server to save it, similar to the original logic
+      await axios.post("/api/auth/user", {
         id: user.id,
         token: newToken,
       });
@@ -144,8 +146,6 @@ const Dashboard = () => {
       toast.info("Successfully regenerated!", {
         position: toast.POSITION.BOTTOM_RIGHT,
       });
-
-      console.log(response.data);
     } catch (error) {
       if (error.message.startsWith("Rate limit exceeded")) {
         toast.error(error.message, {
