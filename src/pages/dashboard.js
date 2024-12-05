@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import LoadingSpinner from "./components/LoadingSpinner";
 import { FaSun, FaMoon, FaSignOutAlt } from "react-icons/fa";
 import ThemeSwitch from "./components/ThemeSwitch";
+import { Button } from "./components/ui/Button";
 
 const Dashboard = () => {
   const router = useRouter();
@@ -319,12 +320,15 @@ const Dashboard = () => {
                       </div>
                     </div>
                     <div className="flex space-x-3">
-                      <button
+                      {/* <button
                         onClick={handleCopyToken}
                         className="flex-1 py-2 px-4 rounded-md bg-accent dark:bg-dark-secondary transition duration-300 text-dark-text"
                       >
                         Copy Token
-                      </button>
+                      </button> */}
+                      <Button className="flex-1" onClick={handleCopyToken}>
+                        Copy Token
+                      </Button>
                       <button
                         onClick={handleRegenerateToken}
                         className="flex-1 py-2 px-4 rounded-md bg-secondary dark:bg-dark-accent transition duration-300 text-text dark:text-dark-text"
