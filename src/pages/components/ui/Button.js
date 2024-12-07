@@ -1,6 +1,6 @@
 import { cva } from "cva";
 
-const styles = cva({
+const buttonStyles = cva({
   base: "relative overflow-hidden rounded-lg transition duration-300 ease-in-out",
   variants: {
     variant: {
@@ -16,8 +16,27 @@ const styles = cva({
     variant: "primary",
     size: "md"
   }
-})
+});
 
-export const Button = ({ children, ...props }) => {
-  return <button className={styles({ variant: props.variant, size: props.size }) + " " + props.className} {...props} >{children}</button>;
-}
+export const Button = ({ 
+  children, 
+  variant,
+  size,
+  className,
+  ...props 
+}) => {
+  const classes = buttonStyles({ 
+    variant, 
+    size,
+    className 
+  });
+
+  return (
+    <button 
+      className={classes} 
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
